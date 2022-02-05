@@ -45,7 +45,7 @@ export default class Controller extends Component {
                 <ListGroup>
                     <ListGroup.Item variant="success" >
                         <Button onClick={this.loadConnections} variant="success">loadConnections</Button>
-                        <p>{this.state.connect==null ? null: this.state.connection}</p>
+                        <p>{this.state.connections===[] ? null: this.state.connections}</p>
                     </ListGroup.Item>
                 </ListGroup>
             </div>

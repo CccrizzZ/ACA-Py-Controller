@@ -1,15 +1,17 @@
 var express = require('express');
-var router = express.Router();
 const axios = require('axios')
 
-var endPoint = 'http://13.92.243.46:8080/'
 
+// the cloud virtual machine address
+var endPoint = 'http://13.92.243.46:8040/'
+
+var router = express.Router();
 router.get('/', async (req, res, next) => {
     console.log("Requested control")
     
     // request infos
     Url = endPoint + '/connections'
-    Data = {}    
+    Data = {}
     Headers = {headers:{}}
 
     // connect to cloud virtual machine
@@ -17,3 +19,5 @@ router.get('/', async (req, res, next) => {
     console.log("Connections=", conn.data)
     res.status(200).send(conns.data)
 })
+
+module.exports = router
