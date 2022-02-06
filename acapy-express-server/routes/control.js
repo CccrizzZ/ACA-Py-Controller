@@ -3,7 +3,7 @@ const axios = require('axios')
 
 
 // the cloud virtual machine address
-var endPoint = 'http://13.92.243.46:8040/'
+var endPoint = 'http://20.120.3.144:8080/'
 
 var router = express.Router();
 router.get('/', async (req, res, next) => {
