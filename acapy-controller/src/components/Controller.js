@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { ListGroup, Button, Form, Navbar, Container, Nav } from 'react-bootstrap'
 import axios from 'axios';
 
-
 export default class Controller extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            connections: [],
+            connections: undefined,
         }
     }
 
@@ -37,13 +36,46 @@ export default class Controller extends Component {
         if (targetContex == null || "") return
 
 
-        axios.post('20.120.3.144/control/acceptrequest', {"id": targetContex})
+        axios.post('http://20.120.3.144:3001/control/acceptrequest', {"id": targetContex})
         .then((res) => {
             console.log(res.data.results)
             alert(res.data.results)
         })
         .catch(error => {
           console.error(error);
+        })
+    }
+
+
+    createInvitaion = (e) => {
+        e.preventDefault();
+
+        axios.post('http://20.120.3.144:3001/control/createinvitation')
+        .then((res) => {
+            console.log(res.data)
+
+            this.setState({
+                newInvitation: res.data
+            })
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    }
+
+    receiveInvitation = (e) => {
+        e.preventDefault();
+
+        axios.post('http://20.120.3.144:3001/control/receiveinvitation')
+        .then((res) => {
+            console.log(res.data)
+
+            this.setState({
+                receivedInvitaion: res.data
+            })
+        })
+        .catch(error => {
+            console.error(error);
         })
     }
 
@@ -69,22 +101,51 @@ export default class Controller extends Component {
                     </Container>
                 </Navbar>
                 <ListGroup style={{ "marginTop": "100px" }}>
+
                     <ListGroup.Item variant="success" >
                         <h4>loadConnections</h4>
                         <Button onClick={this.loadConnections} variant="success">
                             Go
                         </Button>
+                        <div>
+                            <p style={{"wordBreak": "break-all"}}>{JSON.stringify(this.state.connections == null ? undefined : this.state.connections)}</p>
+                        </div>
                     </ListGroup.Item>
+
                     <ListGroup.Item variant="success" >
                         <h4>acceptRequest</h4>
                         <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Group className="mb-3" controlId="formBasicAcceptRequest">
                                 <Form.Control type="text" placeholder="Request ID" onChange={this.handleInput}/>
                             </Form.Group>
-                            <Button variant="success" type="submit" id="formBasicEmail" onClick={this.acceptRequest}>
+                            <Button variant="success" type="submit" id="formBasicAcceptRequest" onClick={this.acceptRequest}>
                                 Go
                             </Button>
                         </Form>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item variant="success" >
+                        <h4>createInvitaion</h4>
+                        <Form>
+                            <Button variant="success" type="submit" id="formBasiccreateInvitaion" onClick={this.createInvitaion}>
+                                Go
+                            </Button>
+                        </Form>
+                        <div>
+                            <p style={{"wordBreak": "break-all"}}>{JSON.stringify(this.state.newInvitation == null ? undefined : this.state.newInvitation)}</p>
+                        </div>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item variant="success" >
+                        <h4>receiveInvitaion</h4>
+                        <Form>
+                            <Button variant="success" type="submit" id="formBasiccreceiveInvitaion" onClick={this.receiveInvitation}>
+                                Go
+                            </Button>
+                        </Form>
+                        <div>
+                            <p style={{"wordBreak": "break-all"}}>{JSON.stringify(this.state.receivedInvitaion == null ? undefined : this.state.receivedInvitaion)}</p>
+                        </div>
                     </ListGroup.Item>
                 </ListGroup>
             </div>
