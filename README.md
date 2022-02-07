@@ -1,7 +1,7 @@
 ## ACA-Py-Controller
 
 
-### The Client :video_game:
+### :video_game: The Client 
 - `./acapy-controller`
 - Build with React.js.
 - Front end app of the express controller server.
@@ -11,7 +11,7 @@ npm i react-scripts
 npm i
 npm start
 ```
-### The Server :computer:
+### :computer: The Server 
 - `./acapy-express-server`
 - Build with Express.js.
 - Connect to and controls the aca-py app running on Linux environtment.
@@ -21,7 +21,7 @@ npm i
 npm start
 ```
 
-### The controller :stars:
+### :stars: The controller 
 - Requires linux evironment
 - Authenticate your seed on https://indy-test.bosch-digital.de
 - Install prerequisites:
